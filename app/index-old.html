@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>front-end error report</title>
+	<style>
+		body{width:100%;height:100%;background:#fff;padding:0;margin:0;font-size:12px;font-family:微软雅黑;}
+		table{width:90%;#border:1px solid #333;border-radius:10px 10px 0 0;overflow:hidden;margin:100px auto;}
+		table thead tr{height:30px;text-align:center;font-weight:bold;background:#e9e9e9;}
+		td{height:30px;}
+		tbody tr{margin-top:10px;cursor:pointer;}	
+		tbody tr:hover td{background:#fff !important;}
+		tbody tr td:nth-child(1){text-align:center;}
+		tbody tr td:nth-child(2){text-align:center;}
+		tbody tr td:nth-child(3){padding-left:8px;color:#f64747;}
+		tbody tr td:nth-child(4){padding-left:8px;}
+		tbody tr td:nth-child(5){padding-left:8px;}
+		tbody tr td:nth-child(6){text-align:center;}
+		tbody tr td:nth-child(7){text-align:center;}
+		tbody tr:nth-child(odd){background:#fafafa !important;}
+		tbody tr:nth-child(even){background:#e9e9e9 !important;}
+	</style>
+</head>
+<body>
+	<table cellpadding="0" cellspacing="0">
+		<thead>
+			<tr>
+				<td width="30px">No</td>
+				<td width="120px">时间</td>
+				<td align="left" style="padding-left:8px;">出错信息</td>
+				<td align="left" style="padding-left:8px;">出错JS文件</td>
+				<td align="left" style="padding-left:8px;">URL</td>
+				<td width="180px">客户端环境</td>
+				<td width="100px">客户端IP</td>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+<script src="lib/jquery.js"></script>	
+<script>
+
+
+
+$.ajax({
+	url:'http://172.24.7.11/data/getReport',
+	cache:false,
+	dataType:'json',
+	success:function(data){
+		initTab(data);
+	}
+});
+
+function initTab(errList){
+	var html = '',
+		i = 0,
+		len = errList.length,
+		item = null;
+	
+	for( i = 0; i < len; i++ ){
+		item = errList[i];
+		//var envArr = item.browser.split(',');
+		html = html + '<tr><td>'+(i+1)+'</td>'+
+				'<td>'+item.datetime.substring(0,16)+'</td>'+
+				'<td>'+item.msg+'</td>'+
+				'<td>'+item.filename+','+item.lineno+'</td>'+
+				'<td>'+item.url+'</td>'+
+				'<td>'+item.browser+'</td>'+
+				'<td>'+item.ip+'</td></tr>';
+	}
+	$('tbody').append($(html));
+}
+
+</script>
+</body>
+</html>

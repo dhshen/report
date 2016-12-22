@@ -1,0 +1,22 @@
+{
+  "name": "nodeweb",
+  "version": "1.0.0",
+  "description": "a web app for front error report.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "dhshen",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "ejs": "^2.5.1",
+    "moment": "^2.14.1",
+    "mongoose": "^4.5.10"
+  }
+}
